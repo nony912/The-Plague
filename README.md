@@ -11,7 +11,7 @@
                     argument number 2 for windows wifi password extractor
       linux has 1 argument:
                     argument number 1 netcat reverse shell
-
+# Screenshots
 # Fetures
    **this script does not need any sort of installation, you only need to have python3 or above
     other fetures of this script includes not being detected by any of their respective operating system's antivirus
