@@ -12,7 +12,7 @@
       linux has 1 argument:
                     argument number 1 netcat reverse shell
 # Screenshots
-/home/kali/Downloads/Screenshot_2023-03-04_13_23_12.png
+![images/The-Plague-screenshot.png]
 # Fetures
    **this script does not need any sort of installation, you only need to have python3 or above
     other fetures of this script includes not being detected by any of their respective operating system's antivirus
