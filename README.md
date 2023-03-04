@@ -7,10 +7,10 @@
             1 for windows
             2 for linux
       windows has 2 arguments:
-                    1 for python windows reverse shell
-                    2 for windows wifi password extractor
+                    argument number 1 for python windows reverse shell
+                    argument number 2 for windows wifi password extractor
       linux has 1 argument:
-                    1 netcat reverse shell
+                    argument number 1 netcat reverse shell
 
 # Fetures
     these scripts have many advantages wich include not being detected by any of their respective operating systems antivirus
