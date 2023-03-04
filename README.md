@@ -1,5 +1,5 @@
 # The_Plague
-    **The_Plague is a multiuse python payload generator
+  **The_Plague is a multiuse python payload generator
     it has payloads for windows and linux as listed below
 # Command:
       python3 the-plague.py [option] [argument] [argument]
