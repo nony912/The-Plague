@@ -13,5 +13,6 @@
                     argument number 1 netcat reverse shell
 
 # Fetures
-    these scripts have many advantages wich include not being detected by any of their respective operating systems antivirus
-    wich include Microsoft-Defender
+    this script does not need any sort of installation, you only need to have python3 or above
+    other fetures of this script includes not being detected by any of their respective operating system's antivirus
+    wich include Microsoft-Defender on Windows11
