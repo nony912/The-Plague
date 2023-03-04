@@ -4,8 +4,8 @@
 # Command:
       python3 the-plague.py [option] [argument] [argument]
       options:
-            1 for windows
-            2 for linux
+            option 1 for windows
+            option 2 for linux
       windows has 2 arguments:
                     argument number 1 for python windows reverse shell
                     argument number 2 for windows wifi password extractor
