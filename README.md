@@ -13,6 +13,6 @@
                     argument number 1 netcat reverse shell
 
 # Fetures
-    this script does not need any sort of installation, you only need to have python3 or above
+   **this script does not need any sort of installation, you only need to have python3 or above
     other fetures of this script includes not being detected by any of their respective operating system's antivirus
     wich include Microsoft-Defender on Windows11
