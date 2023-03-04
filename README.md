@@ -12,7 +12,8 @@
       linux has 1 argument:
                     argument number 1 netcat reverse shell
 # Screenshots
-![images/The-Plague-screenshot.png]
+![The-Plague-screenshot](https://user-images.githubusercontent.com/85025383/222923025-fe9472ed-cdfe-48dc-8458-f5180da70371.png)
+
 # Fetures
    **this script does not need any sort of installation, you only need to have python3 or above
     other fetures of this script includes not being detected by any of their respective operating system's antivirus
