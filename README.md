@@ -22,4 +22,4 @@
   **If you get "OSError: [Errno 98] Address already in use" while trying to rerun the script then you only need to change the LPORT**
 # Notes
 - You culd run the windows-r-shell.pyw normaly "python3 windows-r-shell.pyw" or "pythonw windows-r-shell.pyw" to make it run in the background.
-- windows-r-rshell.pyw also functions as a backdoor a it keeps looking for connections in the backgrounnd until someone connect
+- windows-r-rshell.pyw also functions as a backdoor a it keeps looking for connections in the backgrounnd until a connection is recived
